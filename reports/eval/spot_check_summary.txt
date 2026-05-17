@@ -1,0 +1,9 @@
+WEAK-LABEL SPOT-CHECK SUMMARY
+========================================
+Rows audited (sentiment): 40
+Sentiment rule accuracy : 85.0%
+Rows audited (intent)   : 40
+Intent rule accuracy    : 97.5%
+========================================
+Use these numbers in your case study. If accuracy is
+below ~65%, tune the rules in weak_labeler.py and re-audit.
