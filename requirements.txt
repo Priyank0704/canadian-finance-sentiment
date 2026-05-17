@@ -1,0 +1,71 @@
+# ============================================================
+# Canadian Finance Sentiment & Intent Classifier
+# requirements.txt
+# ============================================================
+# WHY PINNED VERSIONS:
+#   The transformers <-> peft <-> accelerate trio is the #1 source
+#   of "it worked yesterday" fine-tuning errors. transformers v5
+#   broke compatibility with peft < 0.18. We pin a known-good set
+#   so your environment is reproducible and your CI never surprises
+#   you. (Same philosophy as the fraud project's pinned reqs.)
+# ============================================================
+
+# ---- Core deep learning / fine-tuning stack ----
+torch==2.5.1                 # CPU build installs fine; GPU users get CUDA wheel automatically
+transformers==4.46.3         # stays on the 4.x line — paired deliberately with peft 0.13
+peft==0.13.2                 # LoRA / PEFT adapters — matched to transformers 4.46
+accelerate==1.1.1            # device placement + training loop backend for Trainer
+datasets==3.1.0              # HuggingFace datasets loading + processing
+evaluate==0.4.3              # metric computation (f1, accuracy, etc.)
+sentencepiece==0.2.0         # tokenizer backend many finance models need
+safetensors==0.4.5           # safe, fast model weight serialization
+
+# ---- Classical ML / data ----
+scikit-learn==1.5.2          # train/test split, classification_report, confusion matrix
+pandas==2.2.3
+numpy==1.26.4                # 1.x — some HF deps still choke on numpy 2.x
+scipy==1.14.1
+
+# ---- Topic modelling for label discovery (Milestone 2) ----
+bertopic==0.16.4             # discover latent intent themes in the corpus
+umap-learn==0.5.7            # BERTopic dependency — dimensionality reduction
+hdbscan==0.8.40              # BERTopic dependency — clustering
+
+# ---- Experiment tracking ----
+wandb==0.18.7                # Weights & Biases — logs every training run
+
+# ---- Data collection (Milestone 1) ----
+requests==2.32.3
+beautifulsoup4==4.12.3
+lxml==5.3.0
+feedparser==6.0.11           # parse RSS feeds from financial news sources
+
+# ---- Serving + demo (Milestone 5) ----
+fastapi==0.115.5
+uvicorn==0.32.1
+pydantic==2.10.2
+streamlit==1.40.2
+plotly==5.24.1
+
+# ---- Visualisation / reporting ----
+matplotlib==3.9.2
+seaborn==0.13.2
+
+# ---- Utilities ----
+python-dotenv==1.0.1         # load API keys / config from .env
+loguru==0.7.2                # nicer logging — you used this in the fraud project
+tqdm==4.67.1
+pyarrow==18.1.0              # fast parquet read/write for processed data
+
+# ---- Testing ----
+pytest==8.3.4
+httpx==0.28.0                # test client for FastAPI endpoints
+
+# ============================================================
+# NOT pinned here (install separately only if doing the Phi-3
+# LoRA extension in Google Colab — Colab has its own CUDA stack):
+#   bitsandbytes   -> 4-bit quantization for the LLM
+#   trl            -> only if you later try instruction tuning
+# Keep these out of the main file so your CPU/Render deploy
+# stays lean. We'll install them inside the Colab notebook.
+# ============================================================
