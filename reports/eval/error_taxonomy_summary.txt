@@ -1,0 +1,19 @@
+ERROR TAXONOMY SUMMARY
+==================================================
+
+SENTIMENT  (n=50)
+  genuinely_ambiguous       7  ( 14.0%)
+  label_noise              12  ( 24.0%)
+  missing_context          13  ( 26.0%)
+  model_bias               17  ( 34.0%)
+  other                     1  (  2.0%)
+
+INTENT  (n=50)
+  genuinely_ambiguous       0  (  0.0%)
+  label_noise              23  ( 46.0%)
+  missing_context           7  ( 14.0%)
+  model_bias               20  ( 40.0%)
+  other                     0  (  0.0%)
+
+==================================================
+Use these percentages in your case study. The bigger the ambiguous/noise share, the closer your model is to the ceiling imposed by the data quality itself.
